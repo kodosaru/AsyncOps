@@ -1,0 +1,17 @@
+<html>
+<head>
+<title>Test Page</title>
+</head> 
+<body>
+	<H1>Test</H1>
+	<script>
+		var url = 'https://www.youtube.com/watch?v=aSq1cez_flQ';
+		var regExp = /.*(?:youtube.com\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;  
+		var match = url.match(regExp);  
+		if(match){  
+			video_id = match[1];  
+		}  
+		console.log('video_id: ',video_id);
+	</script>
+</body>
+</html>
