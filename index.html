@@ -1,17 +1,25 @@
 <html>
 <head>
-<title>Test Page</title>
+	<title>Test Page</title>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			var url = 'https://www.youtube.com/watch?v=aSq1cez_flQ';
+			var regExp = /.*(?:youtube.com\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;  
+			var match = url.match(regExp);  
+			if(match){  
+				video_id = match[1];  
+			}  
+			console.log('rawURL: ',url);
+			$("#rawURL span").html(url);
+			console.log('video_id: ',video_id);
+			$("#videoID span").html(video_id);
+		});
+	</script>
 </head> 
 <body>
 	<H1>Test</H1>
-	<script>
-		var url = 'https://www.youtube.com/watch?v=aSq1cez_flQ';
-		var regExp = /.*(?:youtube.com\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;  
-		var match = url.match(regExp);  
-		if(match){  
-			video_id = match[1];  
-		}  
-		console.log('video_id: ',video_id);
-	</script>
+	<div id="rawURL"><b>Raw URL: </b><span></span></div>
+	<div id="videoID"><b>YouTube video ID: </b><span></span></div>
 </body>
 </html>
