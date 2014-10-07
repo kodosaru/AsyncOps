@@ -1,0 +1,17 @@
+<html>
+	<head>
+		<title>Test Callbacks</title>
+		<script>
+		  document.getElementById('output').innerHTML += ('starting ...');
+		  document.getElementById('output').innerHTML += ('continuing ...');
+		  document.getElementById('output').innerHTML += ('ending!');
+		</script>
+	</head>
+	<body>
+		<p id ="output">
+		</p>
+	</body>
+</html>
+
+
+
