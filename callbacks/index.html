@@ -1,15 +1,21 @@
 <html>
 	<head>
 		<title>Test Callbacks</title>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
 		<script type="text/javascript">
 		  function accessDOM() {		  
-		  document.getElementById('output').innerHTML += ('starting ...');
-		  window.setTimeout(function(){document.getElementById('output').innerHTML += ('ending2!')},500);
-		  document.getElementById('output').innerHTML += ('continuing ...');
+			  document.getElementById('output').innerHTML += ('starting ...');
+			  window.setTimeout(function(){document.getElementById('output').innerHTML += ('ending2!')},500);
+			  document.getElementById('output').innerHTML += ('continuing ...');
 		  }
-		  function myFunction() {document.getElementById("demo").innerHTML = "foobar";}
-		  $('body').on('click', 'p#output', function() {
-		  alert('You clicked the output paragraph.');
+		  function myFunction() {
+			  document.getElementById("demo").innerHTML = "foobar";
+		  }
+		  $(document).ready(function(){
+			  $('body').on('click', 'p#output', function() {
+				  alert('You clicked the output paragraph.');
+			  });
+			  console.log("my doc is ready!");
 		  });
 		</script>
 	</head>
@@ -22,10 +28,10 @@
 		<table>
 			<tr>
 				<td>
-					<img src="
 				</td>
 			</tr>
 		</table>
+		<p id="output">My onclick test paragraph.</p>
 	</body>
 </html>
 
