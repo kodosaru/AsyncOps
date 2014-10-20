@@ -1,0 +1,12 @@
+
+function test(e) {
+             console.log('Logging out');
+            $.ajax({
+                method: 'post',
+                url: servUrl + '/foobar',
+                data: {'Session': 'somevalue'},
+                success: function(reply) {
+                    console.log(reply);
+                }
+            });
+ };

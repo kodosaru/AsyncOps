@@ -1,0 +1,14 @@
+{
+  "name": "miniapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./miniapp.js"
+  },
+  "dependencies": {
+    "express": "~4.9.0",
+	"body-parser": "*",
+	"xmlhttprequest":"*",
+	"util":"*"
+  }
+}
