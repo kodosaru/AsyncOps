@@ -23,17 +23,17 @@ var xhr = new XMLHttpRequest();
 });	                
 */
 var method= 'post';
-var url= "http://localhost:3000" + "/signupz";
-var creds = { "email": "kodosaru@gmail.com", "password": "mypass"};
+var url= "http://localhost:3000" + "/video_id";
+var creds = { "email": "kodosaru@gmail.com", "password": "mypass","url":"https://www.youtube.com/watch?v=aSq1cez_flQ"};
 
 xhr.onreadystatechange = function() {
 	sys.puts("State: " + this.readyState);
 	
 	if (this.readyState == 4) {
 		sys.puts("Complete.\nBody length: " + this.responseText.length);
-		var response=JSON.parse(this.responseText);
-		sys.puts('Reply: '+response.reply);
-		sys.puts('Mynum: '+response.mynum);
+		//var response=JSON.parse(this.responseText);
+		//sys.puts('Reply: '+response.reply);
+		//sys.puts('Mynum: '+response.mynum);
 	}
 };
 
@@ -41,5 +41,8 @@ xhr.onreadystatechange = function() {
 //xhr.open("GET", "http://localhost:3000/foobar");
 xhr.open(method, url);
 xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
-//xhr.send(JSON.stringify(creds));
-xhr.send();
+console.log("typeof: "+typeof creds);
+xhr.send(JSON.stringify(creds));
+console.log("typeof: "+typeof JSON.stringify(creds));
+//xhr.send("foobar");
+//xhr.send();
