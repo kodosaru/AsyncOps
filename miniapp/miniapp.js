@@ -26,7 +26,8 @@ app.post('/video_id2', function(req, res){
 app.post('/video_id', function(req, res){
     console.log(typeof req);
     var url=req.body.url;
-    console.log(url);
+	console.log("**Input req.body: "+JSON.stringify(req.body));
+    console.log("**Input url: "+url);
     var video_id = '';  
     var regExp = /.*(?:youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=)([^#\&\?]*).*/;  
     var match = url.match(regExp);  
@@ -34,8 +35,12 @@ app.post('/video_id', function(req, res){
         video_id = match[1];  
     } 
     console.log('YouTube video ID: '+video_id);
-    res.setHeader('Content-Type','application/json=UTF-8');
-    res.end(JSON.stringify({"video_id":video_id}));
+    // Setting the response header type is optional
+	res.setHeader('Content-Type','application/json=UTF-8');
+	// ? Do well need "stringify"?
+    //res.end(JSON.stringify({"video_id":video_id}));
+    res.end('{"video_id":"'+video_id+'"}');
+    //res.end('{"video_id":"aSq1cez_flQ"}');
 });
 
 app.post('/proto', function(req, res){

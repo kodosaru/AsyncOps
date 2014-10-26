@@ -9,6 +9,7 @@
     "express": "~4.9.0",
 	"body-parser": "*",
 	"xmlhttprequest":"*",
-	"util":"*"
+	"util":"*",
+	  "async":"*"
   }
 }

@@ -1,49 +1,28 @@
 #!/usr/bin/env node
 
 var sys = require('util');
+
 var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var request = require('request');
+var xhr = new XMLHttpRequest();
 
-
-// Extract the video ID from the URL using XHR
+// Extract the video ID from the URL
 var method= 'post';
 var url= "http://localhost:3000" + "/video_id";
 var post_req = { "url":"https://www.youtube.com/watch?v=aSq1cez_flQ"};
+var resp='';
 
-var xhr = new XMLHttpRequest();
 xhr.onreadystatechange = function() {
 	sys.puts("State: " + this.readyState);
-
+	
 	if (this.readyState == 4) {
-		console.log("Return from first call!!!");
 		sys.puts("Complete.\nBody length: " + this.responseText.length);
-		var resp=JSON.parse(this.responseText);
+		resp=JSON.parse(this.responseText);
 		console.log(resp.video_id);
 		console.log('In func video_id val: '+resp.video_id);
 		console.log('response type: '+typeof this.responseText);
 		console.log('response: ' + this.responseText);
-
-		console.log("Starting YouTube call");
-		//delete xhr;
-		xhr2 = new XMLHttpRequest();
-		var method= 'get';
-		var url= "http://www.youtube.com/get_video_info?video_id="+resp.video_id;
-
-		console.log("Opening URL to query YouTube for video file choices: "+url);
-		xhr2.onreadystatechange = function() {
-			sys.puts("State: " + this.readyState);
-			
-			if (this.readyState == 4) {
-				console.log("Return from YouTube call!!!");
-				sys.puts("Complete.\nBody length: " + this.responseText.length);
-				console.log('response type: '+typeof this.responseText);
-				console.log('response: ' + this.responseText);
-			}
-
-			xhr2.open(method, url);
-			xhr2.setRequestHeader("Content-Type", "application/text");
-			xhr2.send();
-		}
+		//sys.puts('Mynum: '+response.mynum);
 	}
 };
 
@@ -53,31 +32,30 @@ xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
 xhr.send(JSON.stringify(post_req));
 console.log("finished first call");
 
-// Extract the video ID from the URL using simple POST
-console.log("Starting second call");
-var url= "http://localhost:3000" + "/video_id";
-var video_id='';
+post_req = {json:{ "url":"https://www.youtube.com/watch?v=aSq1cez_flQ"}};
+sys.puts("posting request");
+console.log("url: "+url);
+console.log("post_req: "+post_req.url);
 request.post(
-    url,
-    {json:{ "url":"https://www.youtube.com/watch?v=aSq1cez_flQ"}},
+    'http://localhost:3000/video_id',
+    '{json:{ "url":"https://www.youtube.com/watch?v=aSq1cez_flQ"}}',
     function (error, response, body) {
         console.log("error: "+error);
 		console.log("response: "+response);
 		if (!error && response.statusCode == 200) {
-            console.log(JSON.stringify(body));
-			video_id=body.video_id;
-			console.log("Must happen before third call - video_id: "+video_id);
+            console.log("body val: "+body);
+			resp=JSON.parse(body);
         }
     }
 );
+console.log('Outside of func video_id val: '+resp.video_id);
 console.log("finished second call");
 
 // Retrieve raw video information from YouTube
-console.log("Starting third call");
 delete xhr;
 xhr = new XMLHttpRequest();
 var method= 'get';
-var url= "http://www.youtube.com/get_video_info?video_id="+video_id;
+var url= "http://www.youtube.com/get_video_info?video_id="+resp.video_id;
 
 xhr.onreadystatechange = function() {
 	sys.puts("State: " + this.readyState);
