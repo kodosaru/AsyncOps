@@ -18,9 +18,9 @@ function parse_data(data) {
        d = d.replace(/="/g, '%3D%22');  
        d = d.replace(/"/g, '%22');  
        var url = d;  
-       //console.log('URL: '+d);  
-       //console.log('URL length: '+d.length);  
-	   //console.log('*************************************************************');
+	   console.log('*************************************************************');
+       console.log('URL: '+d);  
+       console.log('URL length: '+d.length);  
 
        if(d.length > 1500){  
 		   aux = d.split('&has_cc');  
